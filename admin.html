@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DirectVoice | 管理ダッシュボード</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: #f8fafc; }
+        .sidebar { width: 260px; min-height: 100vh; background: #1e293b; }
+    </style>
+</head>
+<body class="flex">
+
+    <aside class="sidebar text-slate-300 p-6 hidden md:block">
+        <div class="mb-10 px-2">
+            <h1 class="text-white text-2xl font-bold tracking-tight">DirectVoice</h1>
+            <p class="text-xs text-slate-500 mt-1">Admin Console v1.0</p>
+        </div>
+        
+        <nav class="space-y-2">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-blue-600 text-white rounded-xl shadow-lg transition">
+                <i class="fa-solid fa-chart-line"></i> ダッシュボード
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 rounded-xl transition">
+                <i class="fa-solid fa-message"></i> 市民の声 <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">12</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 rounded-xl transition">
+                <i class="fa-solid fa-pen-to-square"></i> 活動報告の投稿
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 rounded-xl transition">
+                <i class="fa-solid fa-users"></i> サポーター管理
+            </a>
+            <div class="pt-10 border-t border-slate-700 mt-10">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 rounded-xl transition text-slate-400">
+                    <i class="fa-solid fa-gear"></i> 設定
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="flex-grow p-8">
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h2 class="text-3xl font-bold text-slate-800">こんにちは、山田議員</h2>
+                <p class="text-slate-500">本日の市民からの新しいメッセージは 12件 です。</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="bg-white border p-2 rounded-full hover:bg-gray-50 shadow-sm transition">
+                    <i class="fa-regular fa-bell"></i>
+                </button>
+                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">山</div>
+            </div>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 mb-1">累計サポーター数</p>
+                <p class="text-2xl font-bold">1,284 <span class="text-xs text-green-500">+12%</span></p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 mb-1">今月の投稿数</p>
+                <p class="text-2xl font-bold">48 件</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 mb-1">平均返信率</p>
+                <p class="text-2xl font-bold text-blue-600">92 %</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
+                <p class="text-sm text-slate-500 mb-1">未返信メッセージ</p>
+                <p class="text-2xl font-bold text-red-500">8 件</p>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+            <div class="p-6 border-b border-slate-50 flex justify-between items-center">
+                <h3 class="text-xl font-bold">最近届いた「市民の声」</h3>
+                <button class="text-sm text-blue-600 font-bold">すべて見る</button>
+            </div>
+            <table class="w-full text-left">
+                <thead class="bg-slate-50 text-slate-500 text-sm uppercase">
+                    <tr>
+                        <th class="px-6 py-4">送信者</th>
+                        <th class="px-6 py-4">内容</th>
+                        <th class="px-6 py-4">カテゴリー</th>
+                        <th class="px-6 py-4 text-center">ステータス</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50 text-sm">
+                    <tr>
+                        <td class="px-6 py-4 font-bold">佐藤 まなぶ</td>
+                        <td class="px-6 py-4 text-slate-600">〇〇駅前の街灯が切れていて夜道が不安です...</td>
+                        <td class="px-6 py-4"><span class="bg-amber-50 text-amber-600 px-3 py-1 rounded-full text-xs">インフラ</span></td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="text-red-500 font-medium">未対応</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-bold">田中 結衣</td>
+                        <td class="px-6 py-4 text-slate-600">子育て支援制度について、申請書類をデジタル化してほしいです。</td>
+                        <td class="px-6 py-4"><span class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs">福祉・DX</span></td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="text-green-500 font-medium">返信済</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 font-bold">高橋 健治</td>
+                        <td class="px-6 py-4 text-slate-600">公園の遊具が老朽化しています。補修をお願いします。</td>
+                        <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full text-xs">教育・公園</span></td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="text-slate-400 font-medium font-bold italic">対応中</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+</body>
+</html>
