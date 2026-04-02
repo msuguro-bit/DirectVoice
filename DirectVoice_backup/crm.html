@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DirectVoice | 有権者一覧</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap');
+        body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: #f8fafc; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex min-h-screen">
+        <main class="flex-grow p-6 md:p-10">
+            <div class="max-w-7xl mx-auto">
+                
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                    <div>
+                        <h1 class="text-3xl font-bold">有権者一覧</h1>
+                        <p class="text-slate-500 text-sm">全 1,284 名のサポーターを管理しています。</p>
+                    </div>
+                    <div class="flex gap-3 w-full md:w-auto">
+                        <button class="flex-grow md:flex-none bg-white border border-slate-200 px-4 py-2 rounded-xl text-sm font-bold shadow-sm hover:bg-slate-50">CSV出力</button>
+                        <button class="flex-grow md:flex-none bg-blue-600 text-white px-6 py-2 rounded-xl text-sm font-bold shadow-lg hover:bg-blue-700 transition">+ 新規登録</button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-6 flex flex-wrap gap-4 items-center">
+                    <div class="relative flex-grow min-w-[280px]">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+                        <input type="text" placeholder="名前、住所、キーワードで検索..." class="w-full pl-11 pr-4 py-3 bg-slate-50 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 transition">
+                    </div>
+                    <select class="bg-slate-50 px-4 py-3 rounded-xl text-sm outline-none border-none">
+                        <option>すべての地域</option>
+                        <option>旭町</option>
+                        <option>中央区</option>
+                        <option>山手地区</option>
+                    </select>
+                    <select class="bg-slate-50 px-4 py-3 rounded-xl text-sm outline-none border-none text-blue-600 font-bold">
+                        <option>支持ランク: すべて</option>
+                        <option>ランクA (積極的)</option>
+                        <option>ランクB (普通)</option>
+                        <option>ランクC (消極的)</option>
+                    </select>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-50/50 text-slate-500 text-xs uppercase font-bold">
+                            <tr>
+                                <th class="px-6 py-4 border-b">名前 / 属性</th>
+                                <th class="px-6 py-4 border-b">地域</th>
+                                <th class="px-6 py-4 border-b text-center">支持ランク</th>
+                                <th class="px-6 py-4 border-b">最終接触日</th>
+                                <th class="px-6 py-4 border-b text-right">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-blue-50/30 transition cursor-pointer" onclick="location.href='crm.html'">
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-sm">佐</div>
+                                        <div>
+                                            <div class="font-bold text-slate-900 text-base">佐藤 まなぶ</div>
+                                            <div class="text-xs text-slate-400">子育て世代・DX関心</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm">旭町 2丁目</td>
+                                <td class="px-6 py-5 text-center">
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">ランクA</span>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-slate-500">2026/04/01</td>
+                                <td class="px-6 py-5 text-right">
+                                    <button class="text-slate-400 hover:text-blue-600 p-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition cursor-pointer">
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold text-sm">鈴</div>
+                                        <div>
+                                            <div class="font-bold text-slate-900 text-base">鈴木 一郎</div>
+                                            <div class="text-xs text-slate-400">シニア・福祉要望</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm">中央区 5丁目</td>
+                                <td class="px-6 py-5 text-center">
+                                    <span class="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-bold">ランクB</span>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-slate-500">2026/03/28</td>
+                                <td class="px-6 py-5 text-right">
+                                    <button class="text-slate-400 hover:text-blue-600 p-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-blue-50/30 transition cursor-pointer">
+                                <td class="px-6 py-5">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 font-bold text-sm">高</div>
+                                        <div>
+                                            <div class="font-bold text-slate-900 text-base">高橋 結衣</div>
+                                            <div class="text-xs text-slate-400">学生・環境問題</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-5 text-sm">山手地区 1丁目</td>
+                                <td class="px-6 py-5 text-center">
+                                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">ランクA</span>
+                                </td>
+                                <td class="px-6 py-5 text-sm text-slate-500">2026/04/02</td>
+                                <td class="px-6 py-5 text-right">
+                                    <button class="text-slate-400 hover:text-blue-600 p-2"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="p-6 bg-slate-50/50 border-t border-slate-100 flex justify-center gap-2">
+                        <button class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:border-blue-500 hover:text-blue-600 transition">1</button>
+                        <button class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold">2</button>
+                        <button class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:border-blue-500 hover:text-blue-600 transition">3</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoliLink | 人と議員をつなぐ架け橋</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+        body { font-family: 'Noto Sans JP', sans-serif; background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); min-height: 100vh; }
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 1.5rem; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <nav class="p-6">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600 tracking-tighter">PoliLink</h1>
+            <div class="hidden md:flex gap-6 font-medium">
+                <a href="#" class="hover:text-blue-500 transition">ホーム</a>
+                <a href="#" class="hover:text-blue-500 transition">議員を探す</a>
+                <a href="#" class="hover:text-blue-500 transition">市民の声</a>
+            </div>
+            <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-lg">ログイン</button>
+        </div>
+    </nav>
+
+    <header class="max-w-6xl mx-auto px-6 py-12 text-center">
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+            あなたの声が、<br><span class="text-blue-600">街の未来</span>を動かす。
+        </h2>
+        <p class="text-lg text-slate-600 mb-10 max-w-2xl mx-auto">
+            PoliLinkは、市民と議員が直接対話し、共により良い社会を創るための「対話型プラットフォーム」です。
+        </p>
+        
+        <div class="max-w-xl mx-auto flex bg-white p-2 rounded-2xl shadow-xl overflow-hidden mb-16">
+            <input type="text" placeholder="議員名、キーワード、地域を入力..." class="flex-grow px-4 py-3 outline-none">
+            <button class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition">検索</button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 pb-20">
+        <div class="flex justify-between items-end mb-8">
+            <h3 class="text-2xl font-bold">注目の議員</h3>
+            <a href="#" class="text-blue-600 font-bold hover:underline">すべて見る <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="glass-card p-6 shadow-sm hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-blue-200 rounded-full overflow-hidden flex items-center justify-center text-blue-500 text-2xl">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl text-slate-900">山田 太郎</h4>
+                        <span class="text-sm bg-blue-100 text-blue-700 px-2 py-0.5 rounded">〇〇市議会</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600 mb-4">「子どもたちの遊び場を10倍に」をスローガンに、教育DXと公園整備を推進しています。</p>
+                <div class="flex gap-2">
+                    <button class="flex-grow bg-white border border-blue-200 text-blue-600 py-2 rounded-lg font-bold hover:bg-blue-50 transition">活動を見る</button>
+                    <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition"><i class="fa-regular fa-comment"></i></button>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 shadow-sm hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-pink-200 rounded-full overflow-hidden flex items-center justify-center text-pink-500 text-2xl">
+                        <i class="fa-solid fa-user-nurse"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl text-slate-900">佐藤 花子</h4>
+                        <span class="text-sm bg-pink-100 text-pink-700 px-2 py-0.5 rounded">〇〇県議会</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600 mb-4">働く世代の福祉を。共働き家庭のサポート体制をデジタル技術で効率化します。</p>
+                <div class="flex gap-2">
+                    <button class="flex-grow bg-white border border-blue-200 text-blue-600 py-2 rounded-lg font-bold hover:bg-blue-50 transition">活動を見る</button>
+                    <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition"><i class="fa-regular fa-comment"></i></button>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 shadow-sm hover:shadow-xl transition transform hover:-translate-y-1">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-emerald-200 rounded-full overflow-hidden flex items-center justify-center text-emerald-500 text-2xl">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl text-slate-900">田中 健一</h4>
+                        <span class="text-sm bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">衆議院議員</span>
+                    </div>
+                </div>
+                <p class="text-sm text-slate-600 mb-4">クリーンな政治を次世代へ。透明性の高い予算管理とオープンデータの活用を提唱。</p>
+                <div class="flex gap-2">
+                    <button class="flex-grow bg-white border border-blue-200 text-blue-600 py-2 rounded-lg font-bold hover:bg-blue-50 transition">活動を見る</button>
+                    <button class="px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition"><i class="fa-regular fa-comment"></i></button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-10 text-slate-400 text-sm">
+        &copy; 2026 PoliLink Project. All rights reserved.
+    </footer>
+
+</body>
+</html>

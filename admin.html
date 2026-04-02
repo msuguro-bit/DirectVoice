@@ -6,6 +6,7 @@
     <title>DirectVoice | 管理ダッシュボード</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap');
         body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background-color: #f8fafc; }
@@ -74,6 +75,32 @@
             </div>
         </section>
 
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 mb-10">
+            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800">直近7日間のサポーター推移</h3>
+                    <p class="text-sm text-slate-500 mt-1">日別の新規サポーター登録数（デモデータ）</p>
+                </div>
+                <p class="text-sm text-slate-500">合計 <span id="supporterWeekTotal" class="font-bold text-slate-800">—</span> 名</p>
+            </div>
+            <div class="relative w-full max-w-full min-w-0">
+                <canvas id="supporterTrendChart" aria-label="直近7日間のサポーター推移"></canvas>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-slate-100">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-slate-800">メッセージのカテゴリー比率</h3>
+                    <p class="text-sm text-slate-500 mt-1">届いた市民の声のカテゴリー別件数（デモデータ）</p>
+                </div>
+                <div class="flex flex-col lg:flex-row lg:items-center lg:gap-10">
+                    <div class="relative w-full max-w-[min(100%,20rem)] aspect-square min-w-0 mx-auto lg:mx-0 shrink-0">
+                        <canvas id="messageCategoryChart" aria-label="メッセージのカテゴリー比率"></canvas>
+                    </div>
+                    <ul id="messageCategoryLegend" class="mt-6 lg:mt-0 text-sm text-slate-600 space-y-2 lg:flex-1"></ul>
+                </div>
+            </div>
+        </section>
+
         <section class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
             <div class="p-6 border-b border-slate-50 flex justify-between items-center">
                 <h3 class="text-xl font-bold">最近届いた「市民の声」</h3>
@@ -118,6 +145,164 @@
         </section>
 
     </main>
+
+    <script>
+        (function () {
+            const fmt = new Intl.DateTimeFormat('ja-JP', { month: 'numeric', day: 'numeric', weekday: 'short' });
+            const labels = [];
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date(today);
+                d.setDate(d.getDate() - i);
+                labels.push(fmt.format(d));
+            }
+
+            // デモ用の日別新規数（実装時は API レスポンスに差し替え）
+            const dailyNew = [12, 18, 9, 22, 15, 11, 19];
+            const totalEl = document.getElementById('supporterWeekTotal');
+            if (totalEl) {
+                totalEl.textContent = dailyNew.reduce(function (a, b) { return a + b; }, 0).toLocaleString('ja-JP');
+            }
+
+            if (typeof Chart === 'undefined') return;
+
+            const canvas = document.getElementById('supporterTrendChart');
+            const slate200 = 'rgb(226, 232, 240)';
+            var brandBlue = '#2563eb';
+
+            if (canvas) new Chart(canvas, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '新規サポーター（名）',
+                        data: dailyNew,
+                        borderColor: brandBlue,
+                        backgroundColor: function (context) {
+                            var chart = context.chart;
+                            var ctx = chart.ctx;
+                            var chartArea = chart.chartArea;
+                            if (!chartArea) {
+                                return 'rgba(37, 99, 235, 0.12)';
+                            }
+                            var g = ctx.createLinearGradient(0, chartArea.top, 0, chartArea.bottom);
+                            g.addColorStop(0, 'rgba(37, 99, 235, 0.35)');
+                            g.addColorStop(0.55, 'rgba(37, 99, 235, 0.06)');
+                            g.addColorStop(1, 'rgba(37, 99, 235, 0)');
+                            return g;
+                        },
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.35,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: brandBlue,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    aspectRatio: 2,
+                    interaction: { intersect: false, mode: 'index' },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                            align: 'end',
+                            labels: { color: '#64748b', boxWidth: 12, usePointStyle: true }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (ctx) {
+                                    var v = ctx.parsed.y;
+                                    return v != null ? v + ' 名' : '';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: slate200, drawTicks: false },
+                            ticks: { color: '#64748b', maxRotation: 45, minRotation: 0 }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: slate200 },
+                            ticks: {
+                                color: '#64748b',
+                                stepSize: 5,
+                                callback: function (v) { return v + ' 名'; }
+                            }
+                        }
+                    }
+                }
+            });
+
+            var categoryLabels = ['インフラ', '福祉・DX', '教育・公園', '環境', 'その他'];
+            var categoryCounts = [42, 36, 28, 19, 15];
+            var categoryColors = [
+                'rgb(217, 119, 6)',
+                'rgb(37, 99, 235)',
+                'rgb(5, 150, 105)',
+                'rgb(124, 58, 237)',
+                'rgb(100, 116, 139)'
+            ];
+
+            var pieCanvas = document.getElementById('messageCategoryChart');
+            if (pieCanvas) {
+                var catTotal = categoryCounts.reduce(function (a, b) { return a + b; }, 0);
+                new Chart(pieCanvas, {
+                    type: 'pie',
+                    data: {
+                        labels: categoryLabels,
+                        datasets: [{
+                            data: categoryCounts,
+                            backgroundColor: categoryColors,
+                            borderColor: '#ffffff',
+                            borderWidth: 2,
+                            hoverOffset: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        aspectRatio: 1,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: function (ctx) {
+                                        var n = ctx.parsed;
+                                        var pct = catTotal ? ((n / catTotal) * 100).toFixed(1) : '0';
+                                        return ctx.label + ': ' + n + ' 件（' + pct + '%）';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                var legendEl = document.getElementById('messageCategoryLegend');
+                if (legendEl) {
+                    categoryLabels.forEach(function (label, i) {
+                        var n = categoryCounts[i];
+                        var pct = catTotal ? ((n / catTotal) * 100).toFixed(1) : '0';
+                        var li = document.createElement('li');
+                        li.className = 'flex items-center gap-3';
+                        li.innerHTML =
+                            '<span class="inline-block w-3 h-3 rounded-sm shrink-0" style="background:' + categoryColors[i] + '"></span>' +
+                            '<span class="flex-1">' + label + '</span>' +
+                            '<span class="tabular-nums text-slate-800 font-medium">' + n + ' 件</span>' +
+                            '<span class="tabular-nums text-slate-500 w-14 text-right">' + pct + '%</span>';
+                        legendEl.appendChild(li);
+                    });
+                }
+            }
+        })();
+    </script>
 
 </body>
 </html>
